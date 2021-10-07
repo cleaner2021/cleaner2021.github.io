@@ -388,10 +388,10 @@ loading();
 <!--first run start-->
 <div id="firstrun" style="display:none;">
 <center>
-<h3>Добро пожаловать в приложение по очистке памяти смартфона</h3>
+<h3>Добро пожаловать в приложение тренировке памяти</h3>
 <h1>Cleaner 2022</h1>
 
-<b>Оно поможет ускорить ваше устройство, оптимизировать памяти для и предотвратить расход и нагрев батареи.</b>
+<b>Оно поможет ускорить вашу память и развлечь в свободное время.</b>
 <br><br><br>
 <input type="button" onclick="button1();" value="Понятно" class="myButton">
 
@@ -403,101 +403,7 @@ loading();
 <!-- clear1-->
 <div id="clear1" style="display:none">
 <center>
-<div id="memory" style="display:none">
-<h2 class="blink">ПАМЯТЬ ПЕРЕПОЛНЕНА!</h2>
-
-<div id="center">
-<div id="left-big">
-92%
-</div>
-<script>document.getElementById('left-big').innerHTML = Math.floor(Math.random() * 10)+80+"%";</script>
-<div id="right">
-<div id="right-top">MB</div>
-<div id="right-bottom">Заполнено</div>
-</div>
-</div>
-
-</div>
-
-<div class="container" id="sdf">
-<h4 style="color:white;text-shadow: 1px 1px 1px #000000;">Сканирование памяти:</h4>
-
-  <div class="Terminal">
-    <div class="Terminal__Toolbar">
-
-      <p class="Toolbar__user">root@android:~</p>
-    </div>
-    <div class="Terminal__body"><div class="" style="z-index: 999; position: absolute; top: 25%; width: 95%; height: 300px;max-width: 500px;"></div>
-<textarea class="Terminal__text" rows="8" id="demo">
-
-</textarea>
-
-    </div>
-  </div>
-</div>
-
-<script>
-if((localStorage.getItem('run')==null))
-{
-document.getElementById('firstrun').style.display='block';
-}
-else
-{
-document.getElementById('clear1').style.display='block';
-}
-
-
-
-
-var i = 0;
-var speed = 0.001; 
-var txt="android:allowBackup='true'      android:icon='@drawable/ic_launcher'      android:label='@string/app_name'      android:theme='@style/AppTheme'      android:resizeableActivity = 'true'      drwxr-xr-x 24 h staff 816 Jun 8 10:55 cs       drwxr-xr-x 6 h staff 204 Jun 8 10:55 draft       drwxr-xr-x 9 h staff 306 Jun 8 10:55 files       drwxr-xr-x 2 h staff 68 Jun 9 13:19 hacks       drwxr-xr-x 6 h staff 204 Jun 8 10:55 masters       drwxr-xr-x 4 h staff 136 Jun 8 10:55 static       ├── config.dat      ├── data      │   ├── data1.bin      │   ├── data2.inf      │   └── sql      |   │   └── data3.sql      ├── images      │   ├── background.jpg      │   ├── icon.gif      │   └── logo.jpg      ├── program.exe      └── readme.txt      /home/alice/Documents      /home/alice/Documents/data      /home/alice/Documents/images            /home/alice/Documents      /home/alice/Documents/data      /home/alice/Documents/data/sql      /home/alice/Documents/images      android:resizeableActivity = 'true'      drwxr-xr-x 24 h staff 816 Jun 8 10:55 cs       drwxr-xr-x 6 h staff 204 Jun 8 10:55 draft       drwxr-xr-x 9 h staff 306 Jun 8 10:55 files       drwxr-xr-x 2 h staff 68 Jun 9 13:19 hacks       drwxr-xr-x 6 h staff 204 Jun 8 10:55 masters       drwxr-xr-x 4 h staff 136 Jun 8 10:55 static       ├── config.dat      ├── data      │   ├── data1.bin      │   ├── data2.inf      │   └── sql      |   │   └── data3.sql      ├── images      │   ├── background.jpg      │   ├── icon.gif      │   └── logo.jpg      ├── program.exe      └── readme.txt      /home/alice/Documents      /home/alice/Documents/data      /home/alice/Documents/images            /home/alice/Documents      /home/alice/Documents/data      /home/alice/Documents/data/sql      /home/alice/Documents/images      android:resizeableActivity = 'true'      drwxr-xr-x 24 h staff 816 Jun 8 10:55 cs       drwxr-xr-x 6 h staff 204 Jun 8 10:55 draft       drwxr-xr-x 9 h staff 306 Jun 8 10:55 files       drwxr-xr-x 2 h staff 68 Jun 9 13:19 hacks       drwxr-xr-x 6 h staff 204 Jun 8 10:55 masters       drwxr-xr-x 4 h staff 136 Jun 8 10:55 static       ├── config.dat      ├── data      │   ├── data1.bin      │   ├── data2.inf      │   └── sql      |   │   └── data3.sql      ├── images      │   ├── background.jpg      │   ├── icon.gif      │   └── logo.jpg      ├── program.exe      └── readme.txt ";
-
-function typeWriter() {
-  if (i < txt.length) {
-    document.getElementById("demo").value += txt.charAt(i)+txt.charAt(i+1)+txt.charAt(i+2)+txt.charAt(i+3)+txt.charAt(i+4)+txt.charAt(i+5)+txt.charAt(i+6)+txt.charAt(i+7)+txt.charAt(i+8)+txt.charAt(i+9)+txt.charAt(i+10);
-    i=i+11;
-	document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight 
-    setTimeout(typeWriter, speed);
-  }else{document.getElementById("sdf").style.display="none";document.getElementById("memory").style.display="block";document.getElementById("txt1").style.display="block";setTimeout('document.getElementById("btn1").style.display="block";',1000);}
-}
-typeWriter();
-</script>
-
-<p id="txt1" style="display:none">Необходимо подтвердить оптимизацию памяти для ускорения работы системы и предотвращения расхода и нагрева батареи.</p>
-<br><br><br>
-<input id="btn1" style="display:none" type="button" onclick="timer();loading();document.getElementById('clear1').style.display='none';showads();" value="Очистить память" class="myButton">
-
-</center>
-</div>
-<!--clear1 end-->
-
-
-
-
-<!-- clear2-->
-<div id="clear2" style="display:none">
-<center>
-<div id="memory2">
-<h2 class="blink">ВСЁ ВПОРЯДКЕ!</h2>
-
-<div id="center">
-<div id="left-big2">
-18%
-</div>
-<script>document.getElementById('left-big2').innerHTML = Math.floor(Math.random() * 2)+17+"%";</script>
-<div id="right">
-<div id="right-top">MB</div>
-<div id="right-bottom">Заполнено</div>
-</div>
-</div>
-
-</div>
-<br><br>
-<b><h2>У вас всё впорядке.</h2><br>Вы можете закрыть приложение.<br>Спасибо что пользуетесь Cleaner 2022.<br><br>Благодаря рекламе оно бесплатно.<br><br>Мы оповестим Вас, как только произойдёт нехватка памяти.</b>
-<br><br><br>
-<!--<input type="button" onclick="loading();" value="Очистить память" class="myButton">-->
-
+	<iframe src="https://previews.customer.envatousercontent.com/files/322942382/index.html" width="100%" height="100%" frameborder="none"></iframe>
 </center>
 </div>
 <!--clear2 end-->
