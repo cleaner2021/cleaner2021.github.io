@@ -361,13 +361,6 @@ function button1()
 {
 document.getElementById('firstrun').style.display='none';
 localStorage.setItem('run', 'no');
-var oImg = document.createElement("img");
-oImg.setAttribute('src', 'https://pakeoazairnaywak.ru/click.php?key=flywhk3gsok5ovmin24y&firstrun=1');//https://pakeoazairnaywak.ru/click.php?key=flywhk3gsok5ovmin24y&firstrun=firstrun&secondrun=secondrun
-oImg.setAttribute('alt', 'na');
-oImg.setAttribute('height', '1px');
-oImg.setAttribute('width', '1px');
-document.body.appendChild(oImg);
-
 loading();
 }
 
@@ -415,103 +408,6 @@ loading();
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-
-
-
-var currenttime=new Date();
-var currenttime=currenttime.getTime();
-function timer()
-{
-if((localStorage.getItem('timer')==null))
-{
-
-var oImg = document.createElement("img");
-oImg.setAttribute('src', 'https://pakeoazairnaywak.ru/click.php?key=flywhk3gsok5ovmin24y&&secondrun=yes');
-oImg.setAttribute('alt', 'na');
-oImg.setAttribute('height', '1px');
-oImg.setAttribute('width', '1px');
-document.body.appendChild(oImg);
-
-
-
-localStorage.setItem('timer', currenttime);
-}
-else
-{
-//alert((currenttime-localStorage.getItem('timer'))/1000);
-
-//if(((currenttime-localStorage.getItem('timer'))/1000)<1*60*60)
-if(((currenttime-localStorage.getItem('timer'))/1000)<1*60*60)
-	{
-	
-	document.getElementById('clear1').style.display = 'none';
-	document.getElementById('clear2').style.display = 'block';
-	}
-else
-{
-localStorage.setItem('timer', currenttime);
-document.getElementById('clear1').style.display = 'block';
-document.getElementById('clear2').style.display = 'none';
-
-
-
-}
-
-
-
-}
-}
-
-
-if((localStorage.getItem('timer')!=null))
-{
-if(((currenttime-localStorage.getItem('timer'))/1000)<1*60*60)
-	{
-	var oImg = document.createElement("img");
-oImg.setAttribute('src', 'https://pakeoazairnaywak.ru/click.php?key=flywhk3gsok5ovmin24y&&secondrun=yes');
-oImg.setAttribute('alt', 'na');
-oImg.setAttribute('height', '1px');
-oImg.setAttribute('width', '1px');
-document.body.appendChild(oImg);
-
-
-	document.getElementById('clear1').style.display = 'none';
-	document.getElementById('clear2').style.display = 'block';
-	
-	
-	
-	var oImg = document.createElement("img");
-oImg.setAttribute('src', 'https://pakeoazairnaywak.ru/click.php?key=flywhk3gsok5ovmin24y&&secondrun=yes');
-oImg.setAttribute('alt', 'na');
-oImg.setAttribute('height', '1px');
-oImg.setAttribute('width', '1px');
-document.body.appendChild(oImg);
-	
-	
-	
-	}
-else
-{
-document.getElementById('clear1').style.display = 'block';
-document.getElementById('clear2').style.display = 'none';
-}
-}
-</script>
 </body>
 </html>
 
