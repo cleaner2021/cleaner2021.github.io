@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+}
+
+.container {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+}
+.Terminal {
+  width: 600px;
+  height: 150px;
+  box-shadow: 2px 4px 10px rgba(0,0,0,.5);
+}
+
+.Terminal__Toolbar {
+  background: linear-gradient(#504b45 0%,#3c3b37 100%);
+  width: 100%;
+  padding: 0 8px;
+  box-sizing: border-box;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.Toolbar__buttons {
+  display: flex;
+  align-items: center;
+}
+
+.Toolbar__button {
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  padding: 0;
+  font-size: 7px;
+  background: linear-gradient(#7d7871 0%, #595953 100%);
+  text-shadow: 0px 1px 0px rgba(255,255,255,0.2);
+  box-shadow: 0px 0px 1px 0px #41403A,0px 1px 1px 0px #474642;
+  border: none;
+  margin-right: 4px;
+
+}
+.Toolbar__button:hover {
+  cursor: pointer;
+}
+.Toolbar__button--exit {
+  background: #f25d2b;
+  background: linear-gradient(#f37458 0%, #de4c12 100%);
+  background-clip: padding-box;
+}
+.Toolbar__button:focus {
+  outline: none;
+}
+
+.Toolbar__user {
+  color: #d5d0ce;
+  margin-left: 4px;
+  font-size: 12px;
+  line-height: 14px;
+  margin-bottom: 1px;
+}
+.Terminal__body {
+  background: rgba(56, 4, 40, .9);
+  height: calc(100% - 25px);
+  margin-top: -1px;
+  padding-top: 2px;
+  font-family: 'Ubuntu mono';
+}
+.Terminal__text {
+  color: #ddd;
+  background-color:black;
+  width:97%;
+  
+}
+
+.Terminal__Prompt {
+  margin-top: 10px;
+  display: flex;
+}
+
+.Prompt__user {
+  color: #87d441;
+}
+.Prompt__location {
+  color: #6d85a9;
+}
+.Prompt__dollar {
+  color: #ddd;
+}
+.Prompt__cursor {
+  height: 17px;
+  width: 8px;
+  background: white;
+  display: block;
+  margin-left: 8px;
+  animation: 2000ms ease infinite alternate blink;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .Terminal {
+    max-height: 150px;
+    width: 95%;
+  }
+}
+
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Exo 2';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/exo2/v10/7cH1v4okm5zmbvwkAx_sfcEuiD8jvvOsNNC_nps.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Exo 2';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/exo2/v10/7cH1v4okm5zmbvwkAx_sfcEuiD8jvvOsPdC_nps.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Exo 2';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/exo2/v10/7cH1v4okm5zmbvwkAx_sfcEuiD8jvvOsNtC_nps.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Exo 2';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/exo2/v10/7cH1v4okm5zmbvwkAx_sfcEuiD8jvvOsN9C_nps.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Exo 2';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/exo2/v10/7cH1v4okm5zmbvwkAx_sfcEuiD8jvvOsOdC_.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+html,body{
+	background:#99D9FF;
+	margin:0;
+	font-family: 'Exo 2', sans-serif;
+}
+.centered{
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:50%;
+	z-index:99000;
+	left:50%;
+	transform:translate(-50%,-50%);
+	background:#99D9FF;
+	filter: blur(1px);
+}
+.blob-1,.blob-2{
+	width:70px;
+	height:70px;
+	position:absolute;
+	background:#fff;
+	border-radius:50%;
+	top:50%;left:50%;
+	transform:translate(-50%,-50%);
+}
+.blob-1{
+	left:20%;
+	animation:osc-l 2.5s ease infinite;
+}
+.blob-2{
+	left:80%;
+	animation:osc-r 2.5s ease infinite;
+	background:#0ff;
+}
+@keyframes osc-l{
+	0%{left:20%;}
+	50%{left:50%;}
+	100%{left:20%;}
+}
+@keyframes osc-r{
+	0%{left:80%;}
+	50%{left:50%;}
+	100%{left:80%;}
+}
+#loading
+{
+display:none;
+
+}
+#all{
+
+}
+
+
+
+
+.myButton {
+	box-shadow:inset 0px 1px 0px 0px #9acc85;
+	background:linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%);
+	background-color:#74ad5a;
+	border:1px solid #3b6e22;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:19px;
+	font-weight:bold;
+	padding:9px 21px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #92b879;
+	width:97%;
+	height:50px;
+	position:absolute;
+	bottom:5px;
+	left:1.5%;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
+	background-color:#68a54b;
+}
+.myButton:active {
+
+}
+
+
+#memory
+{position:relative;
+background-color: #c92e00;
+color:white;
+height:150px;
+padding-top:1px;
+padding-bottom:35px;
+
+}
+#memory2
+{position:relative;
+background-color: green;
+color:white;
+height:150px;
+padding-top:1px;
+padding-bottom:35px;
+
+}
+
+
+#center
+{
+
+vertical-align:middle;
+
+}
+#left-big
+{
+float:left;
+margin-left:15%;
+font-size:70px;
+
+}
+#left-big2
+{
+float:left;
+margin-left:15%;
+font-size:70px;
+
+}
+#right
+{
+    float: right;
+    margin: 20px;
+vertical-align:middle;
+}
+
+
+
+.blink {
+  -webkit-animation: 2s linear infinite condemned_blink_effect; /* for Safari 4.0 - 8.0 */
+  animation: 2s linear infinite condemned_blink_effect;
+}
+
+/* for Safari 4.0 - 8.0 */
+@-webkit-keyframes condemned_blink_effect {
+  0% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+
+@keyframes condemned_blink_effect {
+  0% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+</style>
+</head>
+<body>
+<script>
+function showads()
+{
+
+}
+
+
+function loading()
+{
+setTimeout("document.getElementById('loading').style.display='block';",000)
+setTimeout("document.getElementById('loading').style.display='none';",2200);
+setTimeout("document.location.href = document.location.href",2200);
+
+}
+
+
+function button1()
+{
+document.getElementById('firstrun').style.display='none';
+localStorage.setItem('run', 'no');
+var oImg = document.createElement("img");
+oImg.setAttribute('src', 'https://pakeoazairnaywak.ru/click.php?key=flywhk3gsok5ovmin24y&firstrun=1');//https://pakeoazairnaywak.ru/click.php?key=flywhk3gsok5ovmin24y&firstrun=firstrun&secondrun=secondrun
+oImg.setAttribute('alt', 'na');
+oImg.setAttribute('height', '1px');
+oImg.setAttribute('width', '1px');
+document.body.appendChild(oImg);
+
+loading();
+}
+
+</script>
+<!--loading start-->
+<div id="loading">
+<div class = "centered">
+<div class = "blob-1"></div>
+<div class = "blob-2"></div>
+</div>
+</div>
+<!--loading end-->
+
+<div id="all">
+
+
+
+<!--first run start-->
+<div id="firstrun" style="display:none;">
+<center>
+<h3>Добро пожаловать в приложение по очистке памяти смартфона</h3>
+<h1>Cleaner 2022</h1>
+
+<b>Оно поможет ускорить ваше устройство, оптимизировать памяти для и предотвратить расход и нагрев батареи.</b>
+<br><br><br>
+<input type="button" onclick="button1();" value="Понятно" class="myButton">
+
+</center>
+</div>
+<!--first run end-->
+
+
+<!-- clear1-->
+<div id="clear1" style="display:none">
+<center>
+<div id="memory" style="display:none">
+<h2 class="blink">ПАМЯТЬ ПЕРЕПОЛНЕНА!</h2>
+
+<div id="center">
+<div id="left-big">
+92%
+</div>
+<script>document.getElementById('left-big').innerHTML = Math.floor(Math.random() * 10)+80+"%";</script>
+<div id="right">
+<div id="right-top">MB</div>
+<div id="right-bottom">Заполнено</div>
+</div>
+</div>
+
+</div>
+
+<div class="container" id="sdf">
+<h4 style="color:white;text-shadow: 1px 1px 1px #000000;">Сканирование памяти:</h4>
+
+  <div class="Terminal">
+    <div class="Terminal__Toolbar">
+
+      <p class="Toolbar__user">root@android:~</p>
+    </div>
+    <div class="Terminal__body"><div class="" style="z-index: 999; position: absolute; top: 25%; width: 95%; height: 300px;max-width: 500px;"></div>
+<textarea class="Terminal__text" rows="8" id="demo">
+
+</textarea>
+
+    </div>
+  </div>
+</div>
+
+<script>
+if((localStorage.getItem('run')==null))
+{
+document.getElementById('firstrun').style.display='block';
+}
+else
+{
+document.getElementById('clear1').style.display='block';
+}
+
+
+
+
+var i = 0;
+var speed = 0.001; 
+var txt="android:allowBackup='true'      android:icon='@drawable/ic_launcher'      android:label='@string/app_name'      android:theme='@style/AppTheme'      android:resizeableActivity = 'true'      drwxr-xr-x 24 h staff 816 Jun 8 10:55 cs       drwxr-xr-x 6 h staff 204 Jun 8 10:55 draft       drwxr-xr-x 9 h staff 306 Jun 8 10:55 files       drwxr-xr-x 2 h staff 68 Jun 9 13:19 hacks       drwxr-xr-x 6 h staff 204 Jun 8 10:55 masters       drwxr-xr-x 4 h staff 136 Jun 8 10:55 static       ├── config.dat      ├── data      │   ├── data1.bin      │   ├── data2.inf      │   └── sql      |   │   └── data3.sql      ├── images      │   ├── background.jpg      │   ├── icon.gif      │   └── logo.jpg      ├── program.exe      └── readme.txt      /home/alice/Documents      /home/alice/Documents/data      /home/alice/Documents/images            /home/alice/Documents      /home/alice/Documents/data      /home/alice/Documents/data/sql      /home/alice/Documents/images      android:resizeableActivity = 'true'      drwxr-xr-x 24 h staff 816 Jun 8 10:55 cs       drwxr-xr-x 6 h staff 204 Jun 8 10:55 draft       drwxr-xr-x 9 h staff 306 Jun 8 10:55 files       drwxr-xr-x 2 h staff 68 Jun 9 13:19 hacks       drwxr-xr-x 6 h staff 204 Jun 8 10:55 masters       drwxr-xr-x 4 h staff 136 Jun 8 10:55 static       ├── config.dat      ├── data      │   ├── data1.bin      │   ├── data2.inf      │   └── sql      |   │   └── data3.sql      ├── images      │   ├── background.jpg      │   ├── icon.gif      │   └── logo.jpg      ├── program.exe      └── readme.txt      /home/alice/Documents      /home/alice/Documents/data      /home/alice/Documents/images            /home/alice/Documents      /home/alice/Documents/data      /home/alice/Documents/data/sql      /home/alice/Documents/images      android:resizeableActivity = 'true'      drwxr-xr-x 24 h staff 816 Jun 8 10:55 cs       drwxr-xr-x 6 h staff 204 Jun 8 10:55 draft       drwxr-xr-x 9 h staff 306 Jun 8 10:55 files       drwxr-xr-x 2 h staff 68 Jun 9 13:19 hacks       drwxr-xr-x 6 h staff 204 Jun 8 10:55 masters       drwxr-xr-x 4 h staff 136 Jun 8 10:55 static       ├── config.dat      ├── data      │   ├── data1.bin      │   ├── data2.inf      │   └── sql      |   │   └── data3.sql      ├── images      │   ├── background.jpg      │   ├── icon.gif      │   └── logo.jpg      ├── program.exe      └── readme.txt      /home/alice/Documents      /home/alice/Documents/data      /home/alice/Documents/images            /home/alice/Documents      /home/alice/Documents/data      /home/alice/Documents/data/sql      /home/alice/Documents/images      android:resizeableActivity = 'true'      drwxr-xr-x 24 h staff 816 Jun 8 10:55 cs       drwxr-xr-x 6 h staff 204 Jun 8 10:55 draft       drwxr-xr-x 9 h staff 306 Jun 8 10:55 files       drwxr-xr-x 2 h staff 68 Jun 9 13:19 hacks       drwxr-xr-x 6 h staff 204 Jun 8 10:55 masters       drwxr-xr-x 4 h staff 136 Jun 8 10:55 static       ├── config.dat      ├── data      │   ├── data1.bin      │   ├── data2.inf      │   └── sql      |   │   └── data3.sql      ├── images      │   ├── background.jpg      │   ├── icon.gif      │   └── logo.jpg      ├── program.exe      └── readme.txt      /home/alice/Documents      /home/alice/Documents/data      /home/alice/Documents/images            /home/alice/Documents      /home/alice/Documents/data      /home/alice/Documents/data/sql      /home/alice/Documents/images      android:resizeableActivity = 'true'      drwxr-xr-x 24 h staff 816 Jun 8 10:55 cs       drwxr-xr-x 6 h staff 204 Jun 8 10:55 draft ";
+
+function typeWriter() {
+  if (i < txt.length) {
+    document.getElementById("demo").value += txt.charAt(i)+txt.charAt(i+1)+txt.charAt(i+2)+txt.charAt(i+3)+txt.charAt(i+4)+txt.charAt(i+5)+txt.charAt(i+6)+txt.charAt(i+7)+txt.charAt(i+8)+txt.charAt(i+9)+txt.charAt(i+10);
+    i=i+11;
+	document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight 
+    setTimeout(typeWriter, speed);
+  }else{document.getElementById("sdf").style.display="none";document.getElementById("memory").style.display="block";document.getElementById("txt1").style.display="block";setTimeout('document.getElementById("btn1").style.display="block";',1000);}
+}
+typeWriter();
+</script>
+
+<p id="txt1" style="display:none">Необходимо подтвердить оптимизацию памяти для ускорения работы системы и предотвращения расхода и нагрева батареи.</p>
+<br><br><br>
+<input id="btn1" style="display:none" type="button" onclick="timer();loading();document.getElementById('clear1').style.display='none';showads();" value="Очистить память" class="myButton">
+
+</center>
+</div>
+<!--clear1 end-->
+
+
+
+
+<!-- clear2-->
+<div id="clear2" style="display:none">
+<center>
+<div id="memory2">
+<h2 class="blink">ВСЁ ВПОРЯДКЕ!</h2>
+
+<div id="center">
+<div id="left-big2">
+18%
+</div>
+<script>document.getElementById('left-big2').innerHTML = Math.floor(Math.random() * 2)+17+"%";</script>
+<div id="right">
+<div id="right-top">MB</div>
+<div id="right-bottom">Заполнено</div>
+</div>
+</div>
+
+</div>
+<br><br>
+<b><h2>У вас всё впорядке.</h2><br>Вы можете закрыть приложение.<br>Спасибо что пользуетесь Cleaner 2022.<br><br>Благодаря рекламе оно бесплатно.<br><br>Мы оповестим Вас, как только произойдёт нехватка памяти.</b>
+<br><br><br>
+<!--<input type="button" onclick="loading();" value="Очистить память" class="myButton">-->
+
+</center>
+</div>
+<!--clear2 end-->
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+var currenttime=new Date();
+var currenttime=currenttime.getTime();
+function timer()
+{
+if((localStorage.getItem('timer')==null))
+{
+
+var oImg = document.createElement("img");
+oImg.setAttribute('src', 'https://pakeoazairnaywak.ru/click.php?key=flywhk3gsok5ovmin24y&&secondrun=yes');
+oImg.setAttribute('alt', 'na');
+oImg.setAttribute('height', '1px');
+oImg.setAttribute('width', '1px');
+document.body.appendChild(oImg);
+
+
+
+localStorage.setItem('timer', currenttime);
+}
+else
+{
+//alert((currenttime-localStorage.getItem('timer'))/1000);
+
+//if(((currenttime-localStorage.getItem('timer'))/1000)<1*60*60)
+if(((currenttime-localStorage.getItem('timer'))/1000)<1*60*60)
+	{
+	
+	document.getElementById('clear1').style.display = 'none';
+	document.getElementById('clear2').style.display = 'block';
+	}
+else
+{
+localStorage.setItem('timer', currenttime);
+document.getElementById('clear1').style.display = 'block';
+document.getElementById('clear2').style.display = 'none';
+
+
+
+}
+
+
+
+}
+}
+
+
+if((localStorage.getItem('timer')!=null))
+{
+if(((currenttime-localStorage.getItem('timer'))/1000)<1*60*60)
+	{
+	var oImg = document.createElement("img");
+oImg.setAttribute('src', 'https://pakeoazairnaywak.ru/click.php?key=flywhk3gsok5ovmin24y&&secondrun=yes');
+oImg.setAttribute('alt', 'na');
+oImg.setAttribute('height', '1px');
+oImg.setAttribute('width', '1px');
+document.body.appendChild(oImg);
+
+
+	document.getElementById('clear1').style.display = 'none';
+	document.getElementById('clear2').style.display = 'block';
+	
+	
+	
+	var oImg = document.createElement("img");
+oImg.setAttribute('src', 'https://pakeoazairnaywak.ru/click.php?key=flywhk3gsok5ovmin24y&&secondrun=yes');
+oImg.setAttribute('alt', 'na');
+oImg.setAttribute('height', '1px');
+oImg.setAttribute('width', '1px');
+document.body.appendChild(oImg);
+	
+	
+	
+	}
+else
+{
+document.getElementById('clear1').style.display = 'block';
+document.getElementById('clear2').style.display = 'none';
+}
+}
+</script>
+</body>
+</html>
+
+
